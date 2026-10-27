@@ -1,0 +1,128 @@
+// app/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/' } }
+
+// app/about/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/about' } }
+
+// app/contact/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/contact' } }
+
+// app/services/towing/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/services/towing' } }
+
+// app/price-calculator/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/price-calculator' } }
+
+// app/track-order/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/track-order' } }
+
+// app/blog/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/blog' } }
+
+// app/blog/[id]/page.tsx
+import { type Metadata } from 'next'
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  return { alternates: { canonical: `/blog/${params.id}` } }
+}
+
+// app/careers/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/careers' } }
+
+// app/testimonials/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/testimonials' } }
+
+// app/gallery/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/gallery' } }
+
+// app/privacy/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/privacy' } }
+
+// app/terms/page.tsx
+import { type Metadata } from 'next'
+export const metadata: Metadata = { alternates: { canonical: '/terms' } }
+
+// app/components/Header.tsx
+import Link from 'next/link';
+
+const Header = () => {
+  return (
+    <header>
+      <nav>
+        <Link href="/">Home</Link>
+        <Link href="/about">About</Link>
+        <Link href="/contact">Contact</Link>
+        <Link href="/services/towing">Towing Services</Link>
+        <Link href="/price-calculator">Price Calculator</Link>
+        <Link href="/track-order">Track Order</Link>
+        <Link href="/blog">Blog</Link>
+        <Link href="/gallery">Gallery</Link>
+        <Link href="/testimonials">Testimonials</Link>
+        <Link href="/privacy">Privacy</Link>
+        <Link href="/terms">Terms</Link>
+        <Link href="/careers">Careers</Link>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
+
+// app/components/Footer.tsx
+import Link from 'next/link';
+
+const Footer = () => {
+  return (
+    <footer>
+      <nav>
+        <Link href="/">Home</Link>
+        <Link href="/about">About</Link>
+        <Link href="/contact">Contact</Link>
+        <Link href="/services/towing">Towing Services</Link>
+        <Link href="/price-calculator">Price Calculator</Link>
+        <Link href="/track-order">Track Order</Link>
+        <Link href="/blog">Blog</Link>
+        <Link href="/gallery">Gallery</Link>
+        <Link href="/testimonials">Testimonials</Link>
+        <Link href="/privacy">Privacy</Link>
+        <Link href="/terms">Terms</Link>
+        <Link href="/careers">Careers</Link>
+      </nav>
+    </footer>
+  );
+};
+
+export default Footer;
+
+// app/components/Breadcrumbs.tsx
+import Link from 'next/link';
+
+const Breadcrumbs = ({ items }) => {
+  return (
+    <nav aria-label="breadcrumb">
+      <ol>
+        {items.map((item, index) => (
+          <li key={index}>
+            {index === items.length - 1 ? (
+              <span>{item.label}</span>
+            ) : (
+              <Link href={item.href}>{item.label}</Link>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+};
+
+export default Breadcrumbs;

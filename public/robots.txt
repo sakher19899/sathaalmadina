@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Block preview domains
+User-agent: *
+Disallow: /
+Host: *.v0.dev
+
+User-agent: *
+Disallow: /
+Host: *.vercel.app
+
+# Production domain only
+User-agent: *
+Allow: /
+Host: www.sathaalmadina.com
+
+Sitemap: https://www.sathaalmadina.com/sitemap.xml
