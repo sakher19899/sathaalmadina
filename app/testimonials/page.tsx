@@ -9,7 +9,6 @@ import Footer from "../components/Footer"
 import FloatingButtons from "../components/FloatingButtons"
 import BackToTop from "../components/BackToTop"
 import Image from "next/image"
-import { ReviewJsonLd, BreadcrumbJsonLd } from "../components/JsonLd"
 
 const testimonials = [
   {
@@ -21,7 +20,7 @@ const testimonials = [
     service: "سحب سيارة معطلة",
     comment:
       "خدمة ممتازة وسريعة! تعطلت سيارتي في الطريق ووصلوا خلال 20 دقيقة. السائق كان محترف جداً والسعر معقول. أنصح بهم بشدة.",
-    image: "/--------------.jpg",
+    image: "/placeholder.svg?height=80&width=80&text=أحمد+العلي",
   },
   {
     id: 2,
@@ -32,7 +31,7 @@ const testimonials = [
     service: "نقل سيارة من المدينة إلى جدة",
     comment:
       "نقلوا سيارتي من المدينة إلى جدة بأمان تام. وصلت السيارة بدون أي خدوش والسعر كان أقل من المتوقع. شكراً لكم على الخدمة المميزة.",
-    image: "/------------------.jpg",
+    image: "/placeholder.svg?height=80&width=80&text=فاطمة+القرشي",
   },
   {
     id: 3,
@@ -43,7 +42,7 @@ const testimonials = [
     service: "سحب سيارة من حادث",
     comment:
       "تعرضت لحادث بسيط والحمد لله، واتصلت بهم فوراً. وصلوا بسرعة وتعاملوا مع الموقف بمهنية عالية. السائق كان متفهم ومساعد جداً.",
-    image: "/------------------.jpg",
+    image: "/placeholder.svg?height=80&width=80&text=عبدالله+الأنصاري",
   },
   {
     id: 4,
@@ -54,7 +53,7 @@ const testimonials = [
     service: "خدمة ليلية - سحب سيارة",
     comment:
       "تعطلت سيارتي في الليل وكنت خائفة، لكن خدمة العملاء طمأنوني ووصل السائق خلال 25 دقيقة. خدمة راقية ومحترمة جداً.",
-    image: "/-----------------.jpg",
+    image: "/placeholder.svg?height=80&width=80&text=نورا+الحربي",
   },
   {
     id: 5,
@@ -65,7 +64,7 @@ const testimonials = [
     service: "نقل سيارة جديدة",
     comment:
       "اشتريت سيارة جديدة واحتجت نقلها للبيت. الخدمة كانت جيدة والسعر مناسب، لكن تأخروا قليلاً عن الموعد المحدد. بشكل عام راضي عن الخدمة.",
-    image: "/-------------.jpg",
+    image: "/placeholder.svg?height=80&width=80&text=محمد+الشمري",
   },
   {
     id: 6,
@@ -76,7 +75,7 @@ const testimonials = [
     service: "سحب سيارة معطلة",
     comment:
       "خدمة رائعة! السائق وصل بسرعة وكان لطيف جداً. شرح لي سبب العطل وأعطاني نصائح مفيدة. أكيد سأتعامل معهم مرة أخرى.",
-    image: "/young-arab-woman.png",
+    image: "/placeholder.svg?height=80&width=80&text=سارة+المطيري",
   },
   {
     id: 7,
@@ -87,7 +86,7 @@ const testimonials = [
     service: "نقل سيارة من المدينة إلى الرياض",
     comment:
       "نقلت سيارتي من المدينة للرياض عشان الشغل. وصلت السيارة في الوقت المحدد وبحالة ممتازة. السعر كان عادل والخدمة احترافية.",
-    image: "/--------------.jpg",
+    image: "/placeholder.svg?height=80&width=80&text=يوسف+الغامدي",
   },
   {
     id: 8,
@@ -98,7 +97,7 @@ const testimonials = [
     service: "خدمة طارئة",
     comment:
       "كانت حالة طارئة وسيارتي تعطلت في مكان بعيد. اتصلت بهم وجاؤوا بسرعة رغم صعوبة الوصول للمكان. شكراً لكم على الاهتمام والسرعة.",
-    image: "/-----------------.jpg",
+    image: "/placeholder.svg?height=80&width=80&text=عائشة+الزهراني",
   },
 ]
 
@@ -108,13 +107,6 @@ const stats = [
   { number: "98%", label: "نسبة الرضا", suffix: "" },
   { number: "15", label: "دقيقة متوسط الوصول", suffix: "" },
 ]
-
-const reviewsForSchema = testimonials.map((t) => ({
-  author: t.name,
-  rating: t.rating,
-  reviewBody: t.comment,
-  datePublished: t.date,
-}))
 
 export default function TestimonialsPage() {
   const [filter, setFilter] = useState("all")
@@ -129,11 +121,7 @@ export default function TestimonialsPage() {
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`w-5 h-5 ${i < rating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
-        aria-hidden="true"
-      />
+      <Star key={i} className={`w-5 h-5 ${i < rating ? "text-yellow-400 fill-current" : "text-gray-300"}`} />
     ))
   }
 
@@ -143,30 +131,22 @@ export default function TestimonialsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50" dir="rtl">
-      <ReviewJsonLd reviews={reviewsForSchema} />
-      <BreadcrumbJsonLd
-        items={[
-          { name: "الرئيسية", url: "https://www.sathaalmadina.com" },
-          { name: "آراء العملاء", url: "https://www.sathaalmadina.com/testimonials" },
-        ]}
-      />
-
       <Header />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">آراء عملاء سطحة المدينة المنورة</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">آراء عملائنا</h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              نفخر بثقة عملائنا وآرائهم الإيجابية التي تحفزنا على تقديم أفضل خدمة سحب ونقل سيارات في المدينة المنورة
+              نفخر بثقة عملائنا وآرائهم الإيجابية التي تحفزنا على تقديم أفضل خدمة ممكنة
             </p>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white" aria-label="إحصائيات رضا العملاء">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -185,12 +165,11 @@ export default function TestimonialsPage() {
       {/* Filter Section */}
       <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="flex justify-center gap-4" role="group" aria-label="تصفية التقييمات">
+          <div className="flex justify-center gap-4">
             <Button
               variant={filter === "all" ? "default" : "outline"}
               onClick={() => setFilter("all")}
               className={filter === "all" ? "bg-yellow-500 text-gray-900" : ""}
-              aria-pressed={filter === "all"}
             >
               جميع التقييمات
             </Button>
@@ -198,7 +177,6 @@ export default function TestimonialsPage() {
               variant={filter === "5" ? "default" : "outline"}
               onClick={() => setFilter("5")}
               className={filter === "5" ? "bg-yellow-500 text-gray-900" : ""}
-              aria-pressed={filter === "5"}
             >
               5 نجوم
             </Button>
@@ -206,7 +184,6 @@ export default function TestimonialsPage() {
               variant={filter === "4" ? "default" : "outline"}
               onClick={() => setFilter("4")}
               className={filter === "4" ? "bg-yellow-500 text-gray-900" : ""}
-              aria-pressed={filter === "4"}
             >
               4 نجوم
             </Button>
@@ -215,9 +192,8 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Testimonials Grid */}
-      <section className="py-20" aria-label="تقييمات العملاء">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="sr-only">تقييمات عملاء سطحة المدينة المنورة</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredTestimonials.slice(0, visibleCount).map((testimonial) => (
               <Card key={testimonial.id} className="hover:shadow-lg transition-shadow">
@@ -225,31 +201,26 @@ export default function TestimonialsPage() {
                   <div className="flex items-center mb-4">
                     <Image
                       src={testimonial.image || "/placeholder.svg"}
-                      alt={`صورة ${testimonial.name} - عميل سطحة المدينة المنورة`}
+                      alt={testimonial.name}
                       width={60}
                       height={60}
                       className="rounded-full ml-4"
-                      loading="lazy"
                     />
                     <div className="flex-1">
                       <h3 className="font-bold text-gray-900">{testimonial.name}</h3>
                       <div className="flex items-center text-sm text-gray-600 mb-1">
-                        <MapPin className="w-4 h-4 ml-1" aria-hidden="true" />
+                        <MapPin className="w-4 h-4 ml-1" />
                         {testimonial.location}
                       </div>
                       <div className="flex items-center text-sm text-gray-500">
-                        <Calendar className="w-4 h-4 ml-1" aria-hidden="true" />
-                        <time dateTime={testimonial.date}>
-                          {new Date(testimonial.date).toLocaleDateString("ar-SA")}
-                        </time>
+                        <Calendar className="w-4 h-4 ml-1" />
+                        {new Date(testimonial.date).toLocaleDateString("ar-SA")}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center mb-3">
-                    <div className="flex ml-2" aria-label={`تقييم ${testimonial.rating} من 5 نجوم`}>
-                      {renderStars(testimonial.rating)}
-                    </div>
+                    <div className="flex ml-2">{renderStars(testimonial.rating)}</div>
                     <span className="text-sm text-gray-600">({testimonial.rating}/5)</span>
                   </div>
 
@@ -258,8 +229,8 @@ export default function TestimonialsPage() {
                   </div>
 
                   <div className="relative">
-                    <Quote className="absolute top-0 right-0 w-8 h-8 text-gray-200" aria-hidden="true" />
-                    <blockquote className="text-gray-700 leading-relaxed pr-6">{testimonial.comment}</blockquote>
+                    <Quote className="absolute top-0 right-0 w-8 h-8 text-gray-200" />
+                    <p className="text-gray-700 leading-relaxed pr-6">{testimonial.comment}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -279,17 +250,17 @@ export default function TestimonialsPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">انضم إلى عملاء سطحة المدينة المنورة الراضين</h2>
+          <h2 className="text-3xl font-bold mb-6">انضم إلى عملائنا الراضين</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             احصل على نفس الخدمة المتميزة التي حصل عليها آلاف العملاء قبلك
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:0530001368" aria-label="اتصل الآن برقم سطحة المدينة المنورة">
+            <a href="tel:0530001368">
               <Button className="bg-yellow-500 hover:bg-yellow-400 text-gray-900 px-8 py-3 font-bold">
                 اتصل الآن - 0530001368
               </Button>
             </a>
-            <a href="https://wa.me/966530001368" aria-label="تواصل عبر واتساب">
+            <a href="https://wa.me/966530001368">
               <Button
                 variant="outline"
                 className="border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-gray-900 px-8 py-3 font-bold bg-transparent"

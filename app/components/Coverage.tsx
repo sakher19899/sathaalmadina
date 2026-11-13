@@ -1,183 +1,137 @@
-"use client"
-
-import { useState } from "react"
-import { MapPin, Clock, Phone, CheckCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { MapPin, Clock, Truck, Globe, Shield, Award } from "lucide-react"
 
 const areas = [
-  { name: "حي العوالي", time: "10-15 دقيقة", available: true },
-  { name: "حي الحرة الشرقية", time: "15-20 دقيقة", available: true },
-  { name: "حي قباء", time: "12-18 دقيقة", available: true },
-  { name: "حي النخيل", time: "15-25 دقيقة", available: true },
-  { name: "حي الأزهري", time: "10-20 دقيقة", available: true },
-  { name: "حي الجمعة", time: "15-25 دقيقة", available: true },
-  { name: "حي العيون", time: "20-30 دقيقة", available: true },
-  { name: "حي السلام", time: "15-25 دقيقة", available: true },
-  { name: "حي الدفاع", time: "20-30 دقيقة", available: true },
-  { name: "حي المطار", time: "25-35 دقيقة", available: true },
-  { name: "حي الخالدية", time: "15-25 دقيقة", available: true },
-  { name: "سطحة المليليح", time: "20-30 دقيقة", available: true },
+  "المدينة المنورة - جميع الأحياء",
+  "من المدينة إلى جدة",
+  "من المدينة إلى مكة المكرمة",
+  "من المدينة إلى الرياض",
+  "من المدينة إلى الطائف",
+  "من المدينة إلى ينبع",
+  "من المدينة إلى تبوك",
+  "جميع مدن المملكة العربية السعودية",
 ]
 
-const cities = [
-  { name: "الرياض", distance: "400 كم", price: "من 800 ريال" },
-  { name: "جدة", distance: "350 كم", price: "من 700 ريال" },
-  { name: "مكة المكرمة", distance: "380 كم", price: "من 750 ريال" },
-  { name: "الدمام", distance: "450 كم", price: "من 900 ريال" },
-  { name: "تبوك", distance: "300 كم", price: "من 600 ريال" },
-  { name: "أبها", distance: "650 كم", price: "من 1200 ريال" },
+const features = [
+  {
+    icon: Clock,
+    title: "متوفرون 24 ساعة طوال أيام الأسبوع",
+    color: "text-indigo-500",
+  },
+  {
+    icon: Shield,
+    title: "أسعار منافسة وثابتة",
+    color: "text-blue-500",
+  },
+  {
+    icon: Award,
+    title: "فريق عمل مدرب ومحترف",
+    color: "text-cyan-500",
+  },
+  {
+    icon: Globe,
+    title: "ضمان سلامة السيارة أثناء النقل",
+    color: "text-purple-500",
+  },
 ]
 
 export default function Coverage() {
-  const [activeTab, setActiveTab] = useState("local")
-
   return (
-    <section
-      className="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-cyan-50"
-      id="coverage"
-      aria-labelledby="coverage-heading"
-    >
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full px-6 py-3 mb-6 border border-indigo-200">
-            <MapPin className="w-5 h-5 text-indigo-600 ml-2" aria-hidden="true" />
-            <span className="text-indigo-700 font-medium">مناطق الخدمة</span>
+    <section id="coverage" className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-100 rounded-full blur-3xl opacity-30 -translate-y-48 translate-x-48"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-30 translate-y-48 -translate-x-48"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16 animate-slide-up">
+          <div className="inline-flex items-center bg-indigo-100 text-indigo-700 rounded-full px-4 py-2 text-sm font-medium mb-4">
+            <MapPin className="w-4 h-4 ml-2" />
+            تغطية شاملة
           </div>
-          <h2 id="coverage-heading" className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-            تغطية سطحة المدينة المنورة{" "}
-            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              الشاملة
-            </span>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            مناطق <span className="text-gradient-primary">التغطية</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            تغطية شاملة لجميع أحياء المدينة المنورة مع إمكانية النقل إلى جميع مدن المملكة العربية السعودية
+
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto">
+            نغطي جميع أنحاء المدينة المنورة ونقدم خدمات النقل بين المدن في جميع أنحاء المملكة
           </p>
         </div>
 
-        {/* Tabs */}
-        <div className="flex justify-center mb-12">
-          <div
-            className="bg-white rounded-2xl p-2 shadow-xl border-4 border-indigo-100"
-            role="tablist"
-            aria-label="نوع التغطية"
-          >
-            <button
-              onClick={() => setActiveTab("local")}
-              role="tab"
-              aria-selected={activeTab === "local"}
-              aria-controls="local-panel"
-              className={`px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
-                activeTab === "local"
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
-                  : "text-gray-600 hover:text-indigo-600"
-              }`}
-            >
-              داخل المدينة المنورة
-            </button>
-            <button
-              onClick={() => setActiveTab("intercity")}
-              role="tab"
-              aria-selected={activeTab === "intercity"}
-              aria-controls="intercity-panel"
-              className={`px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
-                activeTab === "intercity"
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
-                  : "text-gray-600 hover:text-indigo-600"
-              }`}
-            >
-              بين المدن
-            </button>
-          </div>
-        </div>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="animate-fade-in">
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
+              {areas.map((area, index) => (
+                <div
+                  key={index}
+                  className="group flex items-center space-x-3 space-x-reverse bg-white p-5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-indigo-500 hover:border-blue-500 transform hover:-translate-y-1"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="bg-gradient-to-r from-indigo-500 to-blue-500 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                    <MapPin className="w-5 h-5 text-white flex-shrink-0" />
+                  </div>
+                  <span className="text-gray-800 font-medium group-hover:text-indigo-600 transition-colors duration-300">
+                    {area}
+                  </span>
+                </div>
+              ))}
+            </div>
 
-        {/* Content */}
-        {activeTab === "local" ? (
-          <div
-            id="local-panel"
-            role="tabpanel"
-            aria-labelledby="local-tab"
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            <h3 className="sr-only">أحياء المدينة المنورة التي نخدمها</h3>
-            {areas.map((area, index) => (
-              <article
-                key={index}
-                className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-4 border-indigo-100 group"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center">
-                    <div className="bg-gradient-to-br from-indigo-500 to-purple-600 w-12 h-12 rounded-xl flex items-center justify-center ml-3 group-hover:scale-110 transition-transform duration-300">
-                      <MapPin className="w-6 h-6 text-white" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
-                        {area.name}
-                      </h4>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Clock className="w-4 h-4 ml-1" aria-hidden="true" />
-                        <span>وقت الوصول: {area.time}</span>
+            <div className="bg-white p-8 rounded-3xl shadow-xl border-2 border-indigo-100 hover:border-indigo-300 transition-all duration-300">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <div className="bg-gradient-to-r from-indigo-500 to-blue-500 p-2 rounded-lg ml-3">
+                  <Truck className="w-6 h-6 text-white" />
+                </div>
+                🚗 ننقل سيارتك إلى أي مدينة في المملكة
+              </h3>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="flex items-center space-x-3 space-x-reverse p-3 bg-indigo-50 rounded-xl">
+                  <Clock className="w-5 h-5 text-indigo-600" />
+                  <span className="text-gray-700">وقت الوصول: 15-30 دقيقة داخل المدينة</span>
+                </div>
+                <div className="flex items-center space-x-3 space-x-reverse p-3 bg-blue-50 rounded-xl">
+                  <Truck className="w-5 h-5 text-blue-600" />
+                  <span className="text-gray-700">سطحات متنوعة حسب نوع السيارة</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative animate-fade-in">
+            <div className="bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 text-white p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 bg-hero-pattern opacity-10"></div>
+
+              <div className="relative z-10">
+                <h3 className="text-3xl font-bold mb-8 text-center text-white">خدمة شاملة في جميع الأوقات</h3>
+
+                <div className="space-y-6">
+                  {features.map((feature, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center space-x-4 space-x-reverse p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl hover:bg-white/20 transition-all duration-300 group"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <div className="bg-white/20 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                        <feature.icon className="w-6 h-6 text-white" />
                       </div>
+                      <span className="text-white group-hover:text-cyan-200 transition-colors duration-300">
+                        {feature.title}
+                      </span>
                     </div>
-                  </div>
-                  <div
-                    className="bg-gradient-to-r from-emerald-500 to-teal-600 w-8 h-8 rounded-full flex items-center justify-center"
-                    aria-label="متوفر"
-                  >
-                    <CheckCircle className="w-5 h-5 text-white" aria-hidden="true" />
-                  </div>
+                  ))}
                 </div>
-                <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-3 border border-indigo-100">
-                  <p className="text-sm text-indigo-700 font-medium">متوفر الآن - سطحة {area.name}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <div
-            id="intercity-panel"
-            role="tabpanel"
-            aria-labelledby="intercity-tab"
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            <h3 className="sr-only">خدمة نقل السيارات بين المدن</h3>
-            {cities.map((city, index) => (
-              <article
-                key={index}
-                className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-4 border-cyan-100 group"
-              >
-                <div className="text-center">
-                  <div className="bg-gradient-to-br from-cyan-500 to-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <MapPin className="w-8 h-8 text-white" aria-hidden="true" />
-                  </div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-cyan-600 transition-colors">
-                    نقل سيارات إلى {city.name}
-                  </h4>
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center justify-center text-gray-600">
-                      <span className="text-sm">المسافة من المدينة المنورة: {city.distance}</span>
-                    </div>
-                    <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-3 border border-cyan-100">
-                      <p className="text-lg font-bold text-cyan-700">{city.price}</p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
 
-        {/* CTA */}
-        <div className="mt-16 text-center">
-          <div className="bg-white rounded-3xl p-8 shadow-2xl border-4 border-indigo-100 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">لا تجد منطقتك في القائمة؟</h3>
-            <p className="text-lg text-gray-600 mb-6">اتصل بنا وسنؤكد لك إمكانية الوصول إلى موقعك في المدينة المنورة</p>
-            <a href="tel:0530001368" aria-label="اتصل للاستفسار عن تغطية منطقتك">
-              <Button className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold px-12 py-4 text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105">
-                <Phone className="w-6 h-6 ml-2" aria-hidden="true" />
-                اتصل للاستفسار - 0530001368
-              </Button>
-            </a>
+                {/* CTA Button */}
+                <div className="mt-8 text-center">
+                  <a href="tel:0530001368">
+                    <button className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white px-8 py-4 rounded-xl font-bold hover:shadow-glow transition-all duration-300 transform hover:scale-105">
+                      احجز خدمتك الآن - 0530001368
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

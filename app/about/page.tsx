@@ -5,7 +5,20 @@ import Footer from "../components/Footer"
 import FloatingButtons from "../components/FloatingButtons"
 import BackToTop from "../components/BackToTop"
 import Image from "next/image"
-import { BreadcrumbJsonLd } from "../components/JsonLd"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "من نحن",
+  description: "تعرف على سطحة المدينة المنورة وخدماتنا.",
+  alternates: {
+    canonical: "https://www.sathaalmadina.com/about",
+  },
+  openGraph: {
+    title: "من نحن | سطحة المدينة المنورة",
+    description: "تعرف على سطحة المدينة المنورة وخدماتنا.",
+    url: "https://www.sathaalmadina.com/about",
+  },
+}
 
 const stats = [
   { number: "5000+", label: "عميل راضٍ", icon: Users },
@@ -61,13 +74,6 @@ const team = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white" dir="rtl">
-      <BreadcrumbJsonLd
-        items={[
-          { name: "الرئيسية", url: "https://www.sathaalmadina.com" },
-          { name: "من نحن", url: "https://www.sathaalmadina.com/about" },
-        ]}
-      />
-
       <Header />
 
       {/* Hero Section */}

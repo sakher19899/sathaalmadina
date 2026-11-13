@@ -1,178 +1,161 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Menu, X, Phone, ChevronDown } from "lucide-react"
-
-const navigation = [
-  { name: "الرئيسية", href: "/" },
-  { name: "من نحن", href: "/about" },
-  {
-    name: "خدماتنا",
-    href: "/services/towing",
-    submenu: [
-      { name: "سحب السيارات", href: "/services/towing" },
-      { name: "المعرض", href: "/gallery" },
-      { name: "حاسبة الأسعار", href: "/price-calculator" },
-    ],
-  },
-  {
-    name: "المزيد",
-    href: "#",
-    submenu: [
-      { name: "المدونة", href: "/blog" },
-      { name: "آراء العملاء", href: "/testimonials" },
-      { name: "الوظائف", href: "/careers" },
-    ],
-  },
-  { name: "تواصل معنا", href: "/contact" },
-]
+import { Phone, Menu, X, MapPin } from "lucide-react"
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b-4 border-gradient-to-r from-indigo-500 to-purple-600">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" dir="rtl">
-        {/* Logo */}
-        <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
-            <h1 className="text-xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              سطحة المدينة
-            </h1>
-          </Link>
-        </div>
-
-        {/* Mobile menu button */}
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-        </div>
-
-        {/* Desktop navigation with dropdowns */}
-        <div className="hidden lg:flex lg:gap-x-6">
-          {navigation.map((item) => (
-            <div key={item.name} className="relative group">
-              {item.submenu ? (
-                <>
-                  <button
-                    className="flex items-center text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-indigo-50"
-                    onMouseEnter={() => setOpenSubmenu(item.name)}
-                    onMouseLeave={() => setOpenSubmenu(null)}
-                  >
-                    {item.name}
-                    <ChevronDown className="w-4 h-4 mr-1" />
-                  </button>
-                  <div
-                    className={`absolute top-full right-0 mt-1 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 transition-all duration-200 ${
-                      openSubmenu === item.name ? "opacity-100 visible" : "opacity-0 invisible"
-                    }`}
-                    onMouseEnter={() => setOpenSubmenu(item.name)}
-                    onMouseLeave={() => setOpenSubmenu(null)}
-                  >
-                    {item.submenu.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        href={subItem.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <Link
-                  href={item.href}
-                  className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-indigo-50"
-                >
-                  {item.name}
-                </Link>
-              )}
+    <header className="bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-900 text-white sticky top-0 z-50 shadow-2xl backdrop-blur-sm border-b border-white/10">
+      <div className="container-responsive">
+        <div className="flex items-center justify-between h-16 sm:h-18">
+          <div className="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+            <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-2 rounded-lg flex-shrink-0 shadow-glow-cyan">
+              <MapPin className="w-5 sm:w-6 h-5 sm:h-6 text-white" />
             </div>
-          ))}
-        </div>
-
-        {/* CTA Button */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="tel:0530001368">
-            <Button className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300">
-              <Phone className="w-4 h-4 ml-2" />
-              اتصل الآن
-            </Button>
-          </a>
-        </div>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 lg:hidden">
-            <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-              <div className="flex items-center justify-between">
-                <Link href="/" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
-                  <span className="text-lg font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    سطحة المدينة
-                  </span>
-                </Link>
-                <button
-                  type="button"
-                  className="-m-2.5 rounded-md p-2.5 text-gray-700"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              <div className="mt-6 flow-root">
-                <div className="-my-6 divide-y divide-gray-500/10">
-                  <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <div key={item.name}>
-                        {item.submenu ? (
-                          <div className="space-y-1">
-                            <span className="block px-3 py-2 text-base font-semibold text-gray-900">{item.name}</span>
-                            {item.submenu.map((subItem) => (
-                              <Link
-                                key={subItem.name}
-                                href={subItem.href}
-                                className="block rounded-lg px-6 py-2 text-sm text-gray-600 hover:bg-gray-50"
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                {subItem.name}
-                              </Link>
-                            ))}
-                          </div>
-                        ) : (
-                          <Link
-                            href={item.href}
-                            className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            {item.name}
-                          </Link>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="py-6">
-                    <a href="tel:0530001368">
-                      <Button className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold">
-                        <Phone className="w-4 h-4 ml-2" />
-                        اتصل الآن - 0530001368
-                      </Button>
-                    </a>
-                  </div>
-                </div>
-              </div>
+            <div className="min-w-0">
+              <h1 className="text-base sm:text-xl font-bold text-white truncate">سطحة المدينة المنورة</h1>
+              <p className="text-xs text-gray-300 hidden sm:block">خدمة 24 ساعة</p>
             </div>
           </div>
+
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 space-x-reverse">
+            <a
+              href="/"
+              className="hover:text-cyan-400 transition-colors duration-300 font-medium relative group text-white text-sm xl:text-base"
+            >
+              الرئيسية
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href="#services"
+              className="hover:text-cyan-400 transition-colors duration-300 font-medium relative group text-white text-sm xl:text-base"
+            >
+              الخدمات
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href="#how-it-works"
+              className="hover:text-purple-400 transition-colors duration-300 font-medium relative group text-white text-sm xl:text-base"
+            >
+              طريقة الطلب
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href="#coverage"
+              className="hover:text-emerald-400 transition-colors duration-300 font-medium relative group text-white text-sm xl:text-base"
+            >
+              مناطق التغطية
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href="#faq"
+              className="hover:text-pink-400 transition-colors duration-300 font-medium relative group text-white text-sm xl:text-base"
+            >
+              الأسئلة الشائعة
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href="#contact"
+              className="hover:text-indigo-400 transition-colors duration-300 font-medium relative group text-white text-sm xl:text-base"
+            >
+              تواصل معنا
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href="/price-calculator"
+              className="hover:text-yellow-400 transition-colors duration-300 font-medium relative group text-white text-sm xl:text-base"
+            >
+              حاسبة الأسعار
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </nav>
+
+          <div className="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+            <a
+              href="tel:0530001368"
+              className="hidden md:flex items-center space-x-2 space-x-reverse bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold hover:shadow-glow transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
+            >
+              <Phone className="w-4 h-4 flex-shrink-0" />
+              <span className="hidden lg:inline">0530001368</span>
+              <span className="lg:hidden">اتصل</span>
+            </a>
+
+            <button
+              className="lg:hidden bg-gradient-to-r from-cyan-500 to-blue-500 p-2 sm:p-3 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-glow-cyan"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="فتح القائمة"
+            >
+              {isMenuOpen ? <X className="w-5 sm:w-6 h-5 sm:h-6" /> : <Menu className="w-5 sm:w-6 h-5 sm:h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {isMenuOpen && (
+          <div className="lg:hidden py-4 sm:py-6 border-t border-white/10 animate-fade-in">
+            <nav className="flex flex-col space-y-3 sm:space-y-4">
+              <a
+                href="/"
+                className="hover:text-cyan-400 transition-colors duration-300 font-medium py-2 text-white text-base sm:text-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                الرئيسية
+              </a>
+              <a
+                href="#services"
+                className="hover:text-cyan-400 transition-colors duration-300 font-medium py-2 text-white text-base sm:text-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                الخدمات
+              </a>
+              <a
+                href="#how-it-works"
+                className="hover:text-purple-400 transition-colors duration-300 font-medium py-2 text-white text-base sm:text-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                طريقة الطلب
+              </a>
+              <a
+                href="#coverage"
+                className="hover:text-emerald-400 transition-colors duration-300 font-medium py-2 text-white text-base sm:text-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                مناطق التغطية
+              </a>
+              <a
+                href="#faq"
+                className="hover:text-pink-400 transition-colors duration-300 font-medium py-2 text-white text-base sm:text-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                الأسئلة الشائعة
+              </a>
+              <a
+                href="#contact"
+                className="hover:text-indigo-400 transition-colors duration-300 font-medium py-2 text-white text-base sm:text-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                تواصل معنا
+              </a>
+              <a
+                href="/price-calculator"
+                className="hover:text-yellow-400 transition-colors duration-300 font-medium py-2 text-white text-base sm:text-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                حاسبة الأسعار
+              </a>
+              <a
+                href="tel:0530001368"
+                className="flex items-center space-x-2 space-x-reverse bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-bold w-fit mt-4 text-base sm:text-lg hover:shadow-glow transition-all duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Phone className="w-5 h-5" />
+                <span>0530001368</span>
+              </a>
+            </nav>
+          </div>
         )}
-      </nav>
+      </div>
     </header>
   )
 }

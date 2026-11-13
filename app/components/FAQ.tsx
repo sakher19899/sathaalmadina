@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, HelpCircle, Phone, MessageCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ChevronDown, ChevronUp, HelpCircle, Phone } from "lucide-react"
 
 const faqs = [
   {
@@ -18,57 +17,64 @@ const faqs = [
   {
     question: "هل سطحة المدينة المنورة تنقل السيارات بين المدن؟",
     answer:
-      "نعم، سطحة المدينة المنورة تنقل السيارات إلى جميع مدن المملكة العربية السعودية بأسعار مميزة وخدمة احترافية.",
+      "نعم، سطحة المدينة المنورة تنقل السيارات إلى جميع مدن المملكة العربية السعودية بأسعار مميزة وخدمة احترافية من المدينة المنورة إلى جدة، مكة، الرياض، والطائف.",
   },
   {
-    question: "كم تكلفة خدمة سطحة المدينة المنورة؟",
+    question: "هل تقدم سطحة المدينة المنورة الخدمة ليلاً؟",
     answer:
-      "أسعار سطحة المدينة المنورة تبدأ من 80 ريال داخل المدينة، ومن 400 ريال للنقل بين المدن. الأسعار تختلف حسب المسافة ونوع السيارة.",
+      "نعم، سطحة المدينة المنورة متوفرة 24 ساعة طوال أيام الأسبوع. رقم سطحة المدينة 0530001368 يعمل في أي وقت لخدمتكم.",
   },
   {
-    question: "هل خدمة سطحة المدينة المنورة متوفرة 24 ساعة؟",
-    answer: "نعم، سطحة المدينة المنورة متوفرة 24 ساعة طوال أيام الأسبوع بما في ذلك العطل والإجازات الرسمية.",
-  },
-  {
-    question: "هل يوجد تأمين على السيارة أثناء النقل؟",
-    answer: "نعم، جميع السيارات مؤمنة بالكامل أثناء عملية النقل مع سطحة المدينة المنورة ضد أي أضرار قد تحدث.",
-  },
-  {
-    question: "ما أنواع السيارات التي تنقلها سطحة المدينة المنورة؟",
+    question: "ما نوع السطحات المتوفرة في المدينة المنورة؟",
     answer:
-      "سطحة المدينة المنورة تنقل جميع أنواع السيارات: الصغيرة، المتوسطة، الكبيرة، الدراجات النارية، والمركبات التجارية الخفيفة.",
+      "سطحة المدينة المنورة توفر سطحات عادية وسطحة هيدروليك المدينة المنورة حسب نوع السيارة والحاجة، مع ضمان النقل الآمن.",
   },
   {
-    question: "كيف يمكنني تتبع موقع السطحة؟",
+    question: "كيف يتم تحديد سعر سطحة المدينة المنورة؟",
     answer:
-      "يمكنك تتبع موقع سطحة المدينة المنورة من خلال الاتصال بخدمة العملاء على 0530001368 أو عبر واتساب للحصول على تحديثات مباشرة.",
+      "يتم تحديد سعر سطحة المدينة المنورة حسب المسافة ونوع الخدمة ونوع السيارة. نقدم أسعار منافسة وشفافة لجميع خدمات سطحة المدينة.",
+  },
+  {
+    question: "هل سطحة المدينة المنورة تغطي جميع الأحياء؟",
+    answer:
+      "نعم، سطحة المدينة المنورة تغطي جميع أحياء ومناطق المدينة المنورة بدون استثناء، من حي العوالي إلى حي قباء وجميع الأحياء الأخرى.",
+  },
+  {
+    question: "ماذا لو كانت السيارة لا تعمل نهائياً؟",
+    answer:
+      "لا مشكلة، سطحة المدينة المنورة تتعامل مع جميع حالات السيارات المعطلة أو التي لا تعمل باستخدام معدات متخصصة. اتصل برقم سطحة المدينة 0530001368.",
   },
 ]
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-indigo-50" id="faq">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full px-6 py-3 mb-6 border border-indigo-200">
-            <HelpCircle className="w-5 h-5 text-indigo-600 ml-2" />
-            <span className="text-indigo-700 font-medium">الأسئلة الشائعة</span>
+    <section id="faq" className="py-20 bg-white relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-20 right-10 w-40 h-40 bg-indigo-100 rounded-full blur-3xl opacity-30"></div>
+        <div className="absolute bottom-20 left-10 w-60 h-60 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16 animate-slide-up">
+          <div className="inline-flex items-center bg-indigo-100 text-indigo-700 rounded-full px-4 py-2 text-sm font-medium mb-4">
+            <HelpCircle className="w-4 h-4 ml-2" />
+            الأسئلة الشائعة
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-            أسئلة شائعة حول{" "}
-            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              سطحة المدينة المنورة
-            </span>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            الأسئلة الشائعة حول <span className="text-gradient-primary">سطحة المدينة المنورة</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            إجابات على أكثر الأسئلة شيوعاً حول خدمات سطحة المدينة المنورة
+
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto">
+            إجابات على أكثر الأسئلة شيوعاً حول خدمات <strong className="text-indigo-600">سطحة المدينة المنورة</strong>{" "}
+            ورقم سطحة المدينة
           </p>
         </div>
 
@@ -77,24 +83,28 @@ export default function FAQ() {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-xl border-4 border-indigo-100 overflow-hidden hover:shadow-2xl transition-all duration-300"
+                className="bg-white rounded-2xl overflow-hidden border-l-4 border-indigo-500 shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <button
-                  className="w-full px-8 py-6 text-right flex items-center justify-between hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 transition-all duration-300"
+                  className="w-full px-8 py-6 text-right flex items-center justify-between hover:bg-gray-50 transition-colors duration-300 group"
                   onClick={() => toggleFAQ(index)}
                 >
-                  <span className="text-lg font-bold text-gray-900 flex-1">{faq.question}</span>
-                  <div
-                    className={`bg-gradient-to-r from-indigo-500 to-purple-600 w-10 h-10 rounded-full flex items-center justify-center ml-4 transition-transform duration-300 ${
-                      openIndex === index ? "rotate-180" : ""
-                    }`}
-                  >
-                    <ChevronDown className="w-5 h-5 text-white" />
+                  <span className="text-lg font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">
+                    {faq.question}
+                  </span>
+                  <div className="bg-indigo-100 p-2 rounded-lg group-hover:bg-indigo-500 transition-all duration-300">
+                    {openIndex === index ? (
+                      <ChevronUp className="w-5 h-5 text-indigo-600 group-hover:text-white" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-indigo-600 group-hover:text-white" />
+                    )}
                   </div>
                 </button>
+
                 {openIndex === index && (
-                  <div className="px-8 pb-6">
-                    <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-100">
+                  <div className="px-8 pb-6 animate-fade-in">
+                    <div className="bg-gray-50 p-6 rounded-xl">
                       <p className="text-gray-700 leading-relaxed text-lg">{faq.answer}</p>
                     </div>
                   </div>
@@ -102,30 +112,19 @@ export default function FAQ() {
               </div>
             ))}
           </div>
+        </div>
 
-          {/* CTA */}
-          <div className="mt-16 text-center">
-            <div className="bg-white rounded-3xl p-8 shadow-2xl border-4 border-indigo-100">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">لم تجد إجابة لسؤالك؟</h3>
-              <p className="text-lg text-gray-600 mb-6">تواصل معنا مباشرة وسنجيب على جميع استفساراتك</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="tel:0530001368">
-                  <Button className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300">
-                    <Phone className="w-5 h-5 ml-2" />
-                    اتصل الآن - 0530001368
-                  </Button>
-                </a>
-                <a href="https://wa.me/966530001368">
-                  <Button
-                    variant="outline"
-                    className="border-2 border-indigo-500 text-indigo-600 hover:bg-indigo-50 font-bold px-8 py-3 shadow-md hover:shadow-lg transition-all duration-300 bg-transparent"
-                  >
-                    <MessageCircle className="w-5 h-5 ml-2" />
-                    واتساب
-                  </Button>
-                </a>
-              </div>
-            </div>
+        <div className="text-center mt-16">
+          <div className="bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-500 text-white p-8 rounded-3xl shadow-2xl inline-block transform hover:scale-105 transition-all duration-300">
+            <h3 className="text-2xl font-bold mb-4 text-white">لديك سؤال آخر عن سطحة المدينة المنورة؟</h3>
+            <p className="mb-6 text-lg text-gray-100">تواصل مع رقم سطحة المدينة مباشرة وسنجيب على جميع استفساراتك</p>
+            <a
+              href="tel:0530001368"
+              className="inline-flex items-center bg-white text-indigo-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              <Phone className="w-5 h-5 ml-2" />
+              اتصل برقم سطحة المدينة - 0530001368
+            </a>
           </div>
         </div>
       </div>

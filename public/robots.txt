@@ -4,13 +4,13 @@ Allow: /
 # Block preview domains
 User-agent: *
 Disallow: /
-Host: *.v0.dev
+Host: *.vercel.app
 
 User-agent: *
 Disallow: /
-Host: *.vercel.app
+Host: *.v0.dev
 
-# Production domain only
+# Production domain
 User-agent: *
 Allow: /
 Host: www.sathaalmadina.com

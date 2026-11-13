@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Cairo, Tajawal } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import FloatingButtons from "./components/FloatingButtons"
+import BackToTop from "./components/BackToTop"
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -34,9 +36,6 @@ export const metadata: Metadata = {
     "رقم سطحة المدينة",
     "سطحة طوارئ",
     "نقل سيارات معطلة",
-    "سطحة هيدروليك",
-    "ونش سحب سيارات",
-    "سطحة المدينة",
   ],
   authors: [{ name: "سطحة المدينة المنورة" }],
   creator: "سطحة المدينة المنورة",
@@ -88,7 +87,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "googlebfd99ec87c9d571a",
+    google: "your-google-verification-code",
   },
     generator: 'v0.app'
 }
@@ -103,6 +102,8 @@ export default function RootLayout({
       <body className="font-cairo antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           {children}
+          <FloatingButtons />
+          <BackToTop />
         </ThemeProvider>
       </body>
     </html>
